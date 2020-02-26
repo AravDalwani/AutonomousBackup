@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;

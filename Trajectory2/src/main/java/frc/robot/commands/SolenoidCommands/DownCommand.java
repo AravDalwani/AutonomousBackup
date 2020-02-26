@@ -5,40 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutonomousCommands;
+package frc.robot.commands.SolenoidCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.SolenoidSubsystem;
 
-public class CommandMoveToAngle extends CommandBase {
-
+public class DownCommand extends CommandBase {
   /**
-   * Creates a new CommandMoveToAngle.
+   * Creates a new DownCommand.
    */
-  
-  public DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-   
-  double end;
-  double initial;
 
-  public CommandMoveToAngle(DriveSubsystem drive) {
+  private SolenoidSubsystem m_SolenoidSubsystem = new SolenoidSubsystem();
+
+  public DownCommand(SolenoidSubsystem solenoid) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_driveSubsystem = drive;
-    addRequirements(m_driveSubsystem);
+    m_SolenoidSubsystem = solenoid;
+    addRequirements(m_SolenoidSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.navx.reset();
-    initial = RobotContainer.navx.getYaw();
+    m_SolenoidSubsystem.setMode(2);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveSubsystem.MoveToAngle(end);
   }
 
   // Called once the command ends or is interrupted.
@@ -49,6 +42,6 @@ public class CommandMoveToAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (RobotContainer.navx.getYaw()) >= initial + end -5;
+    return false;
   }
 }
