@@ -150,27 +150,28 @@ public static double getAverageEncoderPosition() {
     //RobotContainer.navx.reset();
     double sensorPosition = RobotContainer.navx.getYaw();
 
-    SmartDashboard.putNumber("Heading", RobotContainer.navx.getYaw());
-
     double error = SetAngle - sensorPosition;
     
     double timeInterval = Timer.getFPGATimestamp() - lastTimestamp;
 
     SmartDashboard.putNumber("Error", error);
 
-    double outputSpeed =  Math.abs( 0.005 * error );
+    double outputSpeed =  Math.abs( 0.004 * error );
 
     SmartDashboard.putNumber("PID output", outputSpeed);
 
     lastError = error;
     lastTimestamp = Timer.getFPGATimestamp();
 
+    if(outputSpeed > 0.4) {outputSpeed = 0.4;}
+    if(outputSpeed < 0.1) {outputSpeed = 0.1;}
+
     DriveSubsystem.leftMaster.set(outputSpeed); 
     DriveSubsystem.leftSlave.set(outputSpeed);
     DriveSubsystem.rightMaster.set(outputSpeed);
     DriveSubsystem.rightSlave.set(outputSpeed);
 
-    if(RobotContainer.navx.getYaw() > SetAngle)
+    if(RobotContainer.navx.getYaw() > SetAngle - 3)
     {
       DriveSubsystem.leftMaster.set(0); 
       DriveSubsystem.leftSlave.set(0);
@@ -179,10 +180,6 @@ public static double getAverageEncoderPosition() {
     }
   }
 
-public void AutonomousDrive1()
-{
-  MoveToDistance(10);
-}
 
 public DifferentialDriveKinematics getKinematics() {
   return kinematics;

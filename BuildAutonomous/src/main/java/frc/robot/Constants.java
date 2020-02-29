@@ -37,7 +37,7 @@ public static int wheelDiamter = 6;
 public static double wheelCircumference = Math.PI * 6;
 
 public static final double kDistancePerRevolution = Math.PI * 0.1524; // 6 inches is radius  
-public static final double kPulsesPerRevolution = 256;     
+public static final double kPulsesPerRevolution = 360;     
 public static final double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
 public static final double kP_Autonomous = 0.2;

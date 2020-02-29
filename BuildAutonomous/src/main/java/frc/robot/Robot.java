@@ -46,10 +46,14 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Left Drive Encoder Value", RobotContainer.l_enc.getRate());
-    SmartDashboard.putNumber("Right Drive Encoder Value", RobotContainer.r_enc.getRate());
+    // SmartDashboard.putNumber("Left Drive Encoder Value", RobotContainer.l_enc.getRate());
+    // SmartDashboard.putNumber("Right Drive Encoder Value", RobotContainer.r_enc.getRate());
     SmartDashboard.putNumber("Distance", Math.abs(DriveSubsystem.getAverageEncoderPosition()));
-    SmartDashboard.putNumber("Average encoder Value", ((RobotContainer.l_enc.getDistance() + RobotContainer.r_enc.getDistance())/2));
+    SmartDashboard.putNumber("Left Distance", RobotContainer.l_enc.getDistance());
+    SmartDashboard.putNumber("Right Distance", RobotContainer.r_enc.getDistance());
+    SmartDashboard.putNumber("Raw Count Left", RobotContainer.l_enc.getRaw());
+    SmartDashboard.putNumber("Raw Count Right", RobotContainer.r_enc.getRaw());
+    SmartDashboard.putNumber("Heading", RobotContainer.navx.getYaw());
   }
 
   /**
@@ -91,6 +95,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    RobotContainer.l_enc.reset();
+    RobotContainer.r_enc.reset();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

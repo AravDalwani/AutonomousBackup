@@ -11,19 +11,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class CommandMoveToAngle extends CommandBase {
-
+public class CommandMoveToDistance extends CommandBase {
   /**
-   * Creates a new CommandMoveToAngle.
+   * Creates a new CommandMoveToDistance.
    */
-  
   public DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-   
-  double end;
-  double initial;
-
-  public CommandMoveToAngle(DriveSubsystem drive) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  private final double endpoint;
+  
+  public CommandMoveToDistance(DriveSubsystem drive, double e) {
+    // Use addRequirements() here to declare subsystem dependencies
+    endpoint = e;
     m_driveSubsystem = drive;
     addRequirements(m_driveSubsystem);
   }
@@ -31,14 +28,15 @@ public class CommandMoveToAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.navx.reset();
-    initial = RobotContainer.navx.getYaw();
+    RobotContainer.l_enc.reset();
+    RobotContainer.r_enc.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveSubsystem.MoveToAngle(end);
+    m_driveSubsystem.MoveToDistance(endpoint);
+
   }
 
   // Called once the command ends or is interrupted.
@@ -49,6 +47,6 @@ public class CommandMoveToAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (RobotContainer.navx.getYaw()) >= initial + end -5;
+    return Math.abs(m_driveSubsystem.getAverageEncoderPosition()) >= endpoint;
   }
 }

@@ -31,8 +31,8 @@ public class SolenoidSubsystem extends SubsystemBase {
       break;
       case 3:doubleSolenoid.set(DoubleSolenoid.Value.kOff);
       break;
-      default:doubleSolenoid.set(DoubleSolenoid.Value.kForward);
-      break;
+      // default:doubleSolenoid.set(DoubleSolenoid.Value.kForward);
+      // break;
     }
   }
 }

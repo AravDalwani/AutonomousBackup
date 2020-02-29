@@ -10,24 +10,23 @@ package frc.robot.commands.SolenoidCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SolenoidSubsystem;
 
-public class UpCommand extends CommandBase {
+public class DownCommand extends CommandBase {
   /**
-   * Creates a new UpCommand.
+   * Creates a new DownCommand.
    */
-  private SolenoidSubsystem m_SolenoidSubsystem = new SolenoidSubsystem();
 
-  public UpCommand(SolenoidSubsystem solenoid) {
+  private final SolenoidSubsystem m_SolenoidSubsystem;
 
+  public DownCommand(SolenoidSubsystem solenoidSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_SolenoidSubsystem = solenoid;
+    this.m_SolenoidSubsystem = solenoidSubsystem;
     addRequirements(m_SolenoidSubsystem);
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_SolenoidSubsystem.setMode(1);
+    m_SolenoidSubsystem.setMode(2);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,6 +42,6 @@ public class UpCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
